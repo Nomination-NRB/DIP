@@ -32,17 +32,11 @@
               </el-icon>
               应用
             </el-button>
-            <el-divider content-position="center" style="font-size: 20px">仿射</el-divider>
-            <el-button @click="affineHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
-              <el-icon size="medium">
-                <Setting />
-              </el-icon>
-              应用
-            </el-button>
+            
             <el-divider content-position="center" style="font-size: 20px">翻转/镜像</el-divider>
             <div>
-              <el-radio v-model="spinVaue" label="X" size="large" border>X轴翻转</el-radio>
-              <el-radio v-model="spinVaue" label="Y" size="large" border>Y轴翻转</el-radio>
+              <el-radio v-model="spinXYVaue" label="X" size="large" border>X轴翻转</el-radio>
+              <el-radio v-model="spinXYVaue" label="Y" size="large" border>Y轴翻转</el-radio>
             </div>
 
             <el-button @click="reversalHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
@@ -91,7 +85,7 @@
             <el-divider content-position="center" style="font-size: 20px">伽马变换/幂次变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">幂次值</span>
-              <el-input v-model="input1" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputGamma" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="gammaChangeHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
@@ -117,19 +111,19 @@
             <el-divider content-position="center" style="font-size: 20px">分段线性变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">a</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" @change="inputALinear" v-model.number="inputA" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">b</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputB" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">c</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputC" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">d</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputD" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="linearChangeHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
@@ -169,11 +163,11 @@
             <el-divider content-position="center" style="font-size: 20px">高斯噪声</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">均值</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputMean" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">方差</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputVariance" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="addGaussianHandler" type="primary"
               style="margin-top: 6px; margin-left: 4px; align-items: center">
@@ -196,11 +190,11 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">距离</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputMotionDistance" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">角度</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>360)value=360;if(value<0)value=0" v-model="inputMotionAngle" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <div>
@@ -208,7 +202,7 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">半径</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputMotionRadius" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="motionHandler" type="primary"
@@ -223,9 +217,9 @@
             <el-row>
               <div style="margin-bottom: 15px">
                 <div>
-                  <el-radio v-model="ValueOfWiener" label="PSF" size="large" border>PSF</el-radio>
-                  <el-radio v-model="ValueOfWiener" label="NSR" size="large" border>NSR</el-radio>
-                  <el-radio v-model="ValueOfWiener" label="NCORR, ICORR" size="large" border>NCORR, ICORR</el-radio>
+                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="PSF" size="large" border>PSF</el-radio>
+                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NSR" size="large" border>NSR</el-radio>
+                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NCORR, ICORR" size="large" border>NCORR, ICORR</el-radio>
                 </div>
               </div>
             </el-row>
@@ -279,7 +273,7 @@
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputMeanOrMedianSize" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="filterHandler" type="primary"
@@ -303,7 +297,7 @@
 
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="sharpenHandler" type="primary"
@@ -324,8 +318,8 @@
             <div style="margin-bottom: 15px">
               <div style="width: 565px; height: auto; align-items: stretch">
                 <div>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="magnitude" size="large" border>幅度谱</el-radio>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="phase" size="large" border>相位谱</el-radio>
+                  <el-radio v-model="ValueOfmagnitudeOrphase" label="magnitude" size="large" border>幅度谱</el-radio>
+                  <el-radio v-model="ValueOfmagnitudeOrphase" label="phase" size="large" border>相位谱</el-radio>
                 </div>
               </div>
             </div>
@@ -342,15 +336,15 @@
             <div style="margin-bottom: 15px">
               <div style="width: 565px; height: auto; align-items: stretch">
                 <div>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="ideal" size="large" border>理想低通滤波</el-radio>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="butterworth" size="large" border>巴特沃斯低通滤波</el-radio>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="gaussian" size="large" border>高斯低通滤波</el-radio>
+                  <el-radio v-model="ValueOfLowFilter" label="ideal" size="large" border>理想低通滤波</el-radio>
+                  <el-radio v-model="ValueOfLowFilter" label="butterworth" size="large" border>巴特沃斯低通滤波</el-radio>
+                  <el-radio v-model="ValueOfLowFilter" label="gaussian" size="large" border>高斯低通滤波</el-radio>
                 </div>
               </div>
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputLowThreshold" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="lowFilterHandler" type="primary"
@@ -366,15 +360,15 @@
             <div style="margin-bottom: 15px">
               <div style="width: 565px; height: auto; align-items: stretch">
                 <div>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="idealHigh" size="large" border>理想高通滤波</el-radio>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="butterworthHigh" size="large" border>巴特沃斯高通滤波</el-radio>
-                  <el-radio v-model="ValueOfMeanOrMedian" label="gaussianHigh" size="large" border>高斯高通滤波</el-radio>
+                  <el-radio v-model="ValueOfHighFilter" label="idealHigh" size="large" border>理想高通滤波</el-radio>
+                  <el-radio v-model="ValueOfHighFilter" label="butterworthHigh" size="large" border>巴特沃斯高通滤波</el-radio>
+                  <el-radio v-model="ValueOfHighFilter" label="gaussianHigh" size="large" border>高斯高通滤波</el-radio>
                 </div>
               </div>
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
-              <el-input v-model="input2" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputHighThreshold" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="highFilterHandler" type="primary"
@@ -403,43 +397,108 @@ export default {
   data() {
     return {
       activeName: "basic",
+
+      //放大，缩小
       zoomXValue: 1,
       zoomYValue: 1,
-      zoomPepperValue: 0.02,
-      zoomSaltValue: 0.02,
+
+      //旋转
       rotateValue: 0,
-      affineValue: 0,
-      reversalValue: 0,
-      translateValue: 0,
-      logChangeValue: 0,
-      reverseChangeValue: 0,
-      gammaChangeValue: 0,
-      histogramToBalanceValue: 0,
-      histogramToOneValue: 0,
-      linearChange: 0,
-      contrastValue: 0,
-      addSaltPepperValue: 0,
-      addGaussianValue: 0,
-      motionValue: 0,
-      wienerValue: 0,
-      smoothValue: 0,
-      selfMedianValue: 0,
-      selfMeanValue: 0,
-      filterValue: 0,
-      sharpenValue: 0,
-      fftValue: 0,
-      lowFilterValue: 0,
-      highFilterValue: 0,
-      spinVaue: "X",
-      ValueOfMeanOrMedian: "mean",
-      ValueOfSharpen: "Sobel",
-      ValueOfWiener: "PSF",
+      
+      //翻转
+      spinXYVaue: "X",
+      
+      //平移
       transXValue: 0,
       transYValue: 0,
+
+      //对数变换，无参数（待修改）
+      logChangeValue: "log",
+
+      //反色变换，无参数（待修改）
+      reverseChangeValue: "reverse",
+
+      //幂次变换
+      inputGamma: '',
+
+      //直方图均衡化，无参数（待修改）
+      histogramToBalanceValue: 0,
+      
+      //直方图归一化，无参数（待修改）
+      histogramToOneValue: 0,
+
+      //分段线性变换
+      inputA: '',
+      inputB: '',
+      inputC: '',
+      inputD: '',
+
+      //对比度拉伸，无参数（待修改）
+      contrastValue: 0,
+
+      //椒盐噪声
+      zoomPepperValue: 0.02,
+      zoomSaltValue: 0.02,
+      
+      //高斯噪声，均值，方差
+      inputMean:'',
+      inputVariance:'',
+
+      //Motion距离，角度/Disk半径
+      inputMotionDistance: '',
+      inputMotionAngle: '',
+      inputMotionRadius: '',
+
+      //维纳滤波
+      ValueOfWiener: "PSF",
+
+      //平滑约束复原，无参数（待修改）
+      smoothValue: 0,
+
+      //自适应中值滤波，无参数（待修改）
+      selfMedianValue: 0,
+      
+      //自适应均值滤波，无参数（待修改）
+      selfMeanValue: 0,
+
+      //平滑滤波（中值/均值），滤波核大小
+      ValueOfMeanOrMedian: "mean",
+      inputMeanOrMedianSize: '',
+
+      //锐化滤波，滤波核大小
+      ValueOfSharpen: "Sobel",
+      inputSharpenSize: '',
+
+      //傅里叶变换
+      ValueOfmagnitudeOrphase: "magnitude",
+
+      //低通滤波，低通阈值
+      ValueOfLowFilter: "ideal",
+      inputLowThreshold: '',
+
+      //高通滤波，高通阈值
+      ValueOfHighFilter: "idealHigh",
+      inputHighThreshold: '',
+
     };
   },
   methods: {
 
+    radioChange() {
+      const newVal = this.ValueOfWiener
+      console.log(newVal);
+    },
+    gaussianMean() {
+      const newVal = this.inputMean
+      console.log(newVal);
+    },
+    inputALinear(){
+      const newVal = this.inputA
+      console.log(newVal);
+    },
+
+
+  
     async resizeHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -495,32 +554,7 @@ export default {
       });
     },
 
-    async affineHandler() {
-      let loading = ElLoading.service({
-        lock: true,
-        text: "处理中...",
-        background: "rgba(255, 255, 255, 0.2)",
-      });
-      let _id = this.$store.getters.id;
-      //以上为必备操作
-
-      //针对不同操作调用不同API即可
-      let res = await API.affine({
-        affineValue: this.affineValue,
-        id: _id,
-      });
-
-      //以下为必备操作
-      this.$store.commit("image/SET_URL", res.data.file);
-      this.$forceUpdate();
-      this.$emit("refresh");
-      loading.close();
-      ElNotification({
-        title: "操作成功",
-        message: "已仿射图片",
-        type: "success",
-      });
-    },
+    
 
     async reversalHandler() {
       let loading = ElLoading.service({
@@ -533,7 +567,7 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.reversal({
-        reversalValue: this.reversalValue,
+        spinXYVaue: this.spinXYVaue,
         id: _id,
       });
 
@@ -560,7 +594,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.translate({
-        translateValue: this.translateValue,
+        transXValue: this.transXValue,
+        transYValue: this.transYValue,
         id: _id,
       });
 
@@ -642,7 +677,7 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.gammaChange({
-        gammaChangeValue: this.gammaChangeValue,
+        inputGamma: this.inputGamma,
         id: _id,
       });
 
@@ -684,6 +719,8 @@ export default {
         type: "success",
       });
     },
+
+    
     
     
     async histogramToOneHandler() {
@@ -725,7 +762,10 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.linearChange({
-        linearChangeValue: this.linearChangeValue,
+        inputA: this.inputA,
+        inputB: this.inputB,
+        inputC: this.inputC,
+        inputD: this.inputD,
         id: _id,
       });
 
@@ -779,7 +819,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.addSaltPepper({
-        addSaltPepperValue: this.addSaltPepperValue,
+        zoomPepperValue: this.zoomPepperValue,
+        zoomSaltValue: this.zoomSaltValue,
         id: _id,
       });
 
@@ -795,6 +836,7 @@ export default {
       });
     },
     
+   
     async addGaussianHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -806,7 +848,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.addGaussian({
-        addGaussianValue: this.addGaussianValue,
+        inputMean: this.inputMean,
+        inputVariance: this.inputVariance,
         id: _id,
       });
 
@@ -833,7 +876,9 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.motion({
-        motionValue: this.motionValue,
+        inputMotionDistance: this.inputMotionDistance,
+        inputMotionAngle: this.inputMotionAngle,
+        inputMotionRadius: this.inputMotionRadius,
         id: _id,
       });
 
@@ -860,7 +905,7 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.wiener({
-        wienerValue: this.wienerValue,
+        ValueOfwiener: this.ValueOfWiener,
         id: _id,
       });
 
@@ -968,7 +1013,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.filter({
-        filterValue: this.filterValue,
+        ValueOfMeanOrMedian: this.ValueOfMeanOrMedian,
+        inputMeanOrMedianSize: this.inputMeanOrMedianSize,
         id: _id,
       });
 
@@ -995,7 +1041,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.sharpen({
-        sharpenValue: this.sharpenValue,
+        ValueOfSharpen: this.ValueOfSharpen,
+        inputSharpenSize: this.inputSharpenSize,
         id: _id,
       });
 
@@ -1022,7 +1069,7 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.fft({
-        fftValue: this.fftValue,
+        ValueOfmagnitudeOrphase: this.ValueOfmagnitudeOrphase,
         id: _id,
       });
 
@@ -1049,7 +1096,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.lowFilter({
-        lowFilterValue: this.lowFilterValue,
+        ValueOfLowFilter: this.ValueOfLowFilter,
+        inputLowThreshold: this.inputLowThreshold,
         id: _id,
       });
 
@@ -1076,7 +1124,8 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.highFilter({
-        highFilterValue: this.highFilterValue,
+        ValueOfHighFilter: this.ValueOfHighFilter,
+        inputHighThreshold: this.inputHighThreshold,
         id: _id,
       });
 

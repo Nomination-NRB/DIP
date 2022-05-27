@@ -32,7 +32,7 @@ export function resize(data) {
   });
 }
 
-// 缩小放大
+// 旋转
 export function rotate(data) {
   return request({
     url: "/rotate/",
@@ -40,3 +40,24 @@ export function rotate(data) {
     data,
   });
 }
+
+// 反转
+export function reverseChange(data) {
+  return request({
+    url: "/reverseChange/",
+    method: "post",
+    data,
+  });
+}
+
+
+// 分段线性变换
+export function linearChange(data) {
+  return request({
+    url: "/linearChange/",
+    method: "post",
+    data,
+  });
+}
+
+
