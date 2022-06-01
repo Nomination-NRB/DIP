@@ -277,7 +277,7 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
-      <el-tab-pane label="图像分割" name="partition" class="el-tabs__content">
+      <el-tab-pane label="图像分割" name="partitionPart" class="el-tabs__content">
         <el-scrollbar noresize height="560px">
           <div style="width: 98%">
             <el-divider content-position="center" style="font-size: 20px">分割算法</el-divider>
