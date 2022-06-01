@@ -106,14 +106,7 @@
               </el-icon>
               应用
             </el-button>
-            <el-divider content-position="center" style="font-size: 20px">直方图规一化</el-divider>
-            <el-button @click="histogramToOneHandler" type="primary"
-              style="margin-top: 6px; margin-left: 4px; align-items: center">
-              <el-icon size="medium">
-                <Setting />
-              </el-icon>
-              应用
-            </el-button>
+            
             <el-divider content-position="center" style="font-size: 20px">分段线性变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">a</span>
@@ -301,7 +294,6 @@
                 <el-radio v-model="ValueOfSharpen" label="Sobel" size="large" border>Sobel</el-radio>
                 <el-radio v-model="ValueOfSharpen" label="LoG" size="large" border>LoG</el-radio>
                 <el-radio v-model="ValueOfSharpen" label="Laplace" size="large" border>Laplace</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="Prewitt" size="large" border>Prewitt</el-radio>
               </div>
             </div>
 
@@ -353,7 +345,6 @@
                 <el-radio v-model="ValueOfSharpen" label="Sobel" size="large" border>Sobel</el-radio>
                 <el-radio v-model="ValueOfSharpen" label="LoG" size="large" border>LoG</el-radio>
                 <el-radio v-model="ValueOfSharpen" label="Laplace" size="large" border>Laplace</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="Prewitt" size="large" border>Prewitt</el-radio>
               </div>
             </div>
 
@@ -477,20 +468,17 @@ export default {
       transXValue: 0,
       transYValue: 0,
 
-      //对数变换，无参数（待修改）
+      //对数变换，无参数
       logChangeValue: "log",
 
-      //反色变换，无参数（待修改）
+      //反色变换，无参数
       reverseChangeValue: "reverse",
 
       //幂次变换
       inputGamma: '',
 
-      //直方图均衡化，无参数（待修改）
+      //直方图均衡化，无参数
       histogramToBalanceValue: 0,
-
-      //直方图归一化，无参数（待修改）
-      histogramToOneValue: 0,
 
       //分段线性变换
       inputA: '',
@@ -498,7 +486,7 @@ export default {
       inputC: '',
       inputD: '',
 
-      //对比度拉伸，无参数（待修改）
+      //对比度拉伸，无参数
       contrastValue: 0,
 
       //椒盐噪声
