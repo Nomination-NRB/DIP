@@ -32,14 +32,15 @@
               </el-icon>
               应用
             </el-button>
-            
+
             <el-divider content-position="center" style="font-size: 20px">翻转/镜像</el-divider>
             <div>
               <el-radio v-model="spinXYVaue" label="X" size="large" border>X轴翻转</el-radio>
               <el-radio v-model="spinXYVaue" label="Y" size="large" border>Y轴翻转</el-radio>
             </div>
 
-            <el-button @click="reversalHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="reversalHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
@@ -76,7 +77,8 @@
               应用
             </el-button>
             <el-divider content-position="center" style="font-size: 20px">反色变换/反转</el-divider>
-            <el-button @click="reverseChangeHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="reverseChangeHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
@@ -85,24 +87,28 @@
             <el-divider content-position="center" style="font-size: 20px">伽马变换/幂次变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">幂次值</span>
-              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputGamma" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputGamma" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
 
-            <el-button @click="gammaChangeHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="gammaChangeHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
               应用
             </el-button>
             <el-divider content-position="center" style="font-size: 20px">直方图均衡化</el-divider>
-            <el-button @click="histogramToBalanceHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="histogramToBalanceHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
               应用
             </el-button>
             <el-divider content-position="center" style="font-size: 20px">直方图规一化</el-divider>
-            <el-button @click="histogramToOneHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="histogramToOneHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
@@ -111,28 +117,34 @@
             <el-divider content-position="center" style="font-size: 20px">分段线性变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">a</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" @change="inputALinear" v-model.number="inputA" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" @change="inputALinear"
+                v-model.number="inputA" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">b</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputB" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputB" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">c</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputC" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputC" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">d</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputD" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputD" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
-            <el-button @click="linearChangeHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="linearChangeHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
               应用
             </el-button>
             <el-divider content-position="center" style="font-size: 20px">对比度拉伸</el-divider>
-            <el-button @click="contrastHandler" type="primary" style="margin-top: 6px; margin-left: 4px; align-items: center">
+            <el-button @click="contrastHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
               </el-icon>
@@ -163,11 +175,13 @@
             <el-divider content-position="center" style="font-size: 20px">高斯噪声</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">均值</span>
-              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputMean" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputMean" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">方差</span>
-              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputVariance" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputVariance" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="addGaussianHandler" type="primary"
               style="margin-top: 6px; margin-left: 4px; align-items: center">
@@ -179,7 +193,6 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
-
       <el-tab-pane label="复原操作" name="re" class="el-tabs__content">
         <el-scrollbar noresize height="560px">
           <div style="width: 98%">
@@ -190,11 +203,13 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">距离</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputMotionDistance" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputMotionDistance"
+                placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">角度</span>
-              <el-input oninput="if(value>360)value=360;if(value<0)value=0" v-model="inputMotionAngle" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>360)value=360;if(value<0)value=0" v-model="inputMotionAngle" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
 
             <div>
@@ -202,7 +217,8 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">半径</span>
-              <el-input onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputMotionRadius" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value>200)value=200;if(value<0)value=0"
+                v-model="inputMotionRadius" placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="motionHandler" type="primary"
@@ -219,7 +235,8 @@
                 <div>
                   <el-radio @change="radioChange" v-model="ValueOfWiener" label="PSF" size="large" border>PSF</el-radio>
                   <el-radio @change="radioChange" v-model="ValueOfWiener" label="NSR" size="large" border>NSR</el-radio>
-                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NCORR, ICORR" size="large" border>NCORR, ICORR</el-radio>
+                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NCORR, ICORR" size="large" border>
+                    NCORR, ICORR</el-radio>
                 </div>
               </div>
             </el-row>
@@ -260,6 +277,50 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
+      <el-tab-pane label="图像分割" name="partition" class="el-tabs__content">
+        <el-scrollbar noresize height="560px">
+          <div style="width: 98%">
+            <el-divider content-position="center" style="font-size: 20px">分割算法</el-divider>
+            <div style="margin-bottom: 15px">
+              <div>
+                <el-radio v-model="ValueOfOtsuOrGlobal" label="Otsu" size="large" border>Otsu</el-radio>
+                <el-radio v-model="ValueOfOtsuOrGlobal" label="Global" size="large" border>基本全局阈值法</el-radio>
+              </div>
+            </div>
+            <el-button @click="partitionHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+
+            <el-divider content-position="center" style="font-size: 20px">边缘检测</el-divider>
+            <div style="margin-bottom: 15px">
+              <div>
+                <el-radio v-model="ValueOfSharpen" label="Sobel" size="large" border>Sobel</el-radio>
+                <el-radio v-model="ValueOfSharpen" label="LoG" size="large" border>LoG</el-radio>
+                <el-radio v-model="ValueOfSharpen" label="Laplace" size="large" border>Laplace</el-radio>
+                <el-radio v-model="ValueOfSharpen" label="Prewitt" size="large" border>Prewitt</el-radio>
+              </div>
+            </div>
+
+            <div>
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
+            </div>
+
+            <el-button @click="sharpenHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+          </div>
+        </el-scrollbar>
+      </el-tab-pane>
       <el-tab-pane label="空间域操作" name="space" class="el-tabs__content">
         <el-scrollbar noresize height="560px">
           <div style="width: 98%">
@@ -273,7 +334,8 @@
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
-              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputMeanOrMedianSize" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputMeanOrMedianSize"
+                placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="filterHandler" type="primary"
@@ -297,7 +359,8 @@
 
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
-              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="sharpenHandler" type="primary"
@@ -344,7 +407,8 @@
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
-              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputLowThreshold" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputLowThreshold"
+                placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="lowFilterHandler" type="primary"
@@ -368,7 +432,8 @@
             </div>
             <div>
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
-              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputHighThreshold" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputHighThreshold"
+                placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
 
             <el-button @click="highFilterHandler" type="primary"
@@ -404,10 +469,10 @@ export default {
 
       //旋转
       rotateValue: 0,
-      
+
       //翻转
       spinXYVaue: "X",
-      
+
       //平移
       transXValue: 0,
       transYValue: 0,
@@ -423,7 +488,7 @@ export default {
 
       //直方图均衡化，无参数（待修改）
       histogramToBalanceValue: 0,
-      
+
       //直方图归一化，无参数（待修改）
       histogramToOneValue: 0,
 
@@ -439,10 +504,10 @@ export default {
       //椒盐噪声
       zoomPepperValue: 0.02,
       zoomSaltValue: 0.02,
-      
+
       //高斯噪声，均值，方差
-      inputMean:'',
-      inputVariance:'',
+      inputMean: '',
+      inputVariance: '',
 
       //Motion距离，角度/Disk半径
       inputMotionDistance: '',
@@ -457,9 +522,12 @@ export default {
 
       //自适应中值滤波，无参数（待修改）
       selfMedianValue: 0,
-      
+
       //自适应均值滤波，无参数（待修改）
       selfMeanValue: 0,
+
+      //Otsu，基于全局阈值
+      ValueOfOtsuOrGlobal: "Otsu",
 
       //平滑滤波（中值/均值），滤波核大小
       ValueOfMeanOrMedian: "mean",
@@ -492,13 +560,13 @@ export default {
       const newVal = this.inputMean
       console.log(newVal);
     },
-    inputALinear(){
+    inputALinear() {
       const newVal = this.inputA
       console.log(newVal);
     },
 
 
-  
+
     async resizeHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -554,7 +622,7 @@ export default {
       });
     },
 
-    
+
 
     async reversalHandler() {
       let loading = ElLoading.service({
@@ -611,7 +679,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async logChangeHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -692,7 +760,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async histogramToBalanceHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -720,9 +788,9 @@ export default {
       });
     },
 
-    
-    
-    
+
+
+
     async histogramToOneHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -780,7 +848,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async contrastHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -807,7 +875,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async addSaltPepperHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -835,8 +903,8 @@ export default {
         type: "success",
       });
     },
-    
-   
+
+
     async addGaussianHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -864,7 +932,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async motionHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -893,7 +961,7 @@ export default {
         type: "success",
       });
     },
-   
+
     async wienerHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -920,7 +988,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async smoothHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -947,7 +1015,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async selfMedianHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -974,7 +1042,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async selfMeanHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1001,7 +1069,34 @@ export default {
         type: "success",
       });
     },
-    
+
+    async partitionHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
+
+      //针对不同操作调用不同API即可
+      let res = await API.partition({
+        ValueOfOtsuOrGlobal: this.ValueOfOtsuOrGlobal,
+        id: _id,
+      });
+
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过自适应均值滤波处理",
+        type: "success",
+      });
+    },
+
     async filterHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1029,7 +1124,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async sharpenHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1057,7 +1152,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async fftHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1084,7 +1179,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async lowFilterHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1112,7 +1207,7 @@ export default {
         type: "success",
       });
     },
-    
+
     async highFilterHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -1149,7 +1244,7 @@ export default {
 
 
 
-    
+
   },
 };
 </script>

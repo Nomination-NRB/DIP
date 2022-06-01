@@ -186,6 +186,15 @@ export function selfMean(data) {
   });
 }
 
+//Otsu，基本全局阈值分割
+export function partition(data) {
+  return request({
+    url: "/partition/",
+    method: "post",
+    data,
+  });
+}
+
 // 平滑滤波（中值/均值）
 export function filter(data) {
   return request({
