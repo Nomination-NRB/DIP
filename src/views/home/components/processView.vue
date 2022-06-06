@@ -163,7 +163,7 @@ export default {
         id: this.imageID,
       });
       console.log("完成后获取的直方图：", histData);
-      this.modImageUrl = this.$store.getters.url + "?date=" + Date.now;
+      this.modImageUrl = this.$store.getters.url + "?date=" + String(Date.now());
       this.chartOpt = this.$eChartFn.testBar(histData);
       this.$forceUpdate();
     },

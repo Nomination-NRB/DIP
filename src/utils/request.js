@@ -4,7 +4,7 @@ import { ElMessage } from "element-plus";
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  timeout: 5000, // 默认超时时间
+  timeout: 15000, // 默认超时时间
 });
 
 let loading = null;

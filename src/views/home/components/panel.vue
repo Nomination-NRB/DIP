@@ -106,7 +106,7 @@
               </el-icon>
               应用
             </el-button>
-            
+
             <el-divider content-position="center" style="font-size: 20px">分段线性变换</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">a</span>
@@ -297,7 +297,7 @@
               </div>
             </div>
 
-            <div>
+            <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
               <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值"
                 style="margin-left: 10px; width: 200px" />
@@ -324,7 +324,7 @@
                 <el-radio v-model="ValueOfMeanOrMedian" label="median" size="large" border>中值滤波</el-radio>
               </div>
             </div>
-            <div>
+            <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
               <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputMeanOrMedianSize"
                 placeholder="输入值" style="margin-left: 10px; width: 200px" />
@@ -348,7 +348,7 @@
               </div>
             </div>
 
-            <div>
+            <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
               <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值"
                 style="margin-left: 10px; width: 200px" />
@@ -396,12 +396,15 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
               <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputLowThreshold"
                 placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
-
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">巴特幂次</span>
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputLowButter" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+            </div>
             <el-button @click="lowFilterHandler" type="primary"
               style="margin-top: 26px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
@@ -421,12 +424,15 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值大小</span>
               <el-input oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputHighThreshold"
                 placeholder="输入值" style="margin-left: 10px; width: 200px" />
             </div>
-
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">巴特幂次</span>
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputHighButter" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+            </div>
             <el-button @click="highFilterHandler" type="primary"
               style="margin-top: 26px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
@@ -531,10 +537,12 @@ export default {
       //低通滤波，低通阈值
       ValueOfLowFilter: "ideal",
       inputLowThreshold: '',
+      inputLowButter: '',
 
       //高通滤波，高通阈值
       ValueOfHighFilter: "idealHigh",
       inputHighThreshold: '',
+      inputHighButter: '',
 
     };
   },
@@ -1181,6 +1189,7 @@ export default {
       let res = await API.lowFilter({
         ValueOfLowFilter: this.ValueOfLowFilter,
         inputLowThreshold: this.inputLowThreshold,
+        inputLowButter: this.inputLowButter,
         id: _id,
       });
 
@@ -1209,6 +1218,7 @@ export default {
       let res = await API.highFilter({
         ValueOfHighFilter: this.ValueOfHighFilter,
         inputHighThreshold: this.inputHighThreshold,
+        inputHighButter: this.inputHighButter,
         id: _id,
       });
 
