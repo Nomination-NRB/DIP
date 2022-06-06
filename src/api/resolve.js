@@ -187,6 +187,16 @@ export function partition(data) {
   });
 }
 
+//边缘检测
+export function edge(data) {
+  return request({
+    url: "/edge/",
+    method: "post",
+    data,
+  });
+}
+
+
 // 平滑滤波（中值/均值）
 export function filter(data) {
   return request({
@@ -239,3 +249,20 @@ export function highFilter(data) {
   });
 }
 
+// RGB转HSI
+export function rgbToHSI(data) { 
+  return request({
+    url: "/rgbToHSI/",
+    method: "post",
+    data,
+  });
+}
+
+//彩图分割
+export function edgeColor(data) {
+  return request({
+    url: "/edgeColor/",
+    method: "post",
+    data,
+  });
+}

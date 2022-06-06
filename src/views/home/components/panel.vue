@@ -243,7 +243,7 @@
                   <el-tag style="margin-top: 6px; align-items: center; font-size: 15px">NSR</el-tag>
                 </div>
                 <div class="slider-demo-block">
-                  <span class="demonstration" style="margin-right: 4px; overflow: visible">半径</span>
+                  <span class="demonstration" style="margin-right: 4px; overflow: visible">噪信比</span>
                   <el-input onkeyup="value=value.replace(/[^\d]/g,'')"
                     oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputNSRRadius" placeholder="输入值"
                     style="margin-left: 10px; width: 200px" />
@@ -302,21 +302,28 @@
             </el-button>
 
             <el-divider content-position="center" style="font-size: 20px">边缘检测</el-divider>
-            <div style="margin-bottom: 15px">
+            <div style="margin-bottom: 15px"> 
               <div>
-                <el-radio v-model="ValueOfSharpenTwo" label="Sobel" size="large" border>Sobel</el-radio>
-                <el-radio v-model="ValueOfSharpenTwo" label="LoG" size="large" border>LoG</el-radio>
-                <el-radio v-model="ValueOfSharpenTwo" label="Laplace" size="large" border>Laplace</el-radio>
+                <el-radio v-model="ValueOfEdge" label="Sobel" size="large" border>Sobel</el-radio>
+                <el-radio v-model="ValueOfEdge" label="LoG" size="large" border>LoG</el-radio>
+                <el-radio v-model="ValueOfEdge" label="Laplace" size="large" border>Laplace</el-radio>
               </div>
             </div>
 
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
-              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputSharpenSize" placeholder="输入值"
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputEdgeKernel" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
+                
+            </div>
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值的大小</span>
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputEdgeThreshold" placeholder="输入值"
                 style="margin-left: 10px; width: 200px" />
             </div>
+            
 
-            <el-button @click="sharpenHandler" type="primary"
+            <el-button @click="edgeHandler" type="primary"
               style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
@@ -326,6 +333,7 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
+
       <el-tab-pane label="空间域操作" name="space" class="el-tabs__content">
         <el-scrollbar noresize height="560px">
           <div style="width: 98%">
@@ -480,6 +488,62 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
+      <el-tab-pane label="彩图处理" name="colorful" class="el-tabs__content">
+        <el-scrollbar noresize height="560px">
+          <div style="width: 98%">
+            <el-divider content-position="center" style="font-size: 20px">RGB转HSI
+            </el-divider>
+            <div style="margin-bottom: 15px">
+              <div style="width: 565px; height: auto; align-items: stretch">
+                <div>
+                  <el-radio v-model="ValueOfRGBToHSI" label="H" size="large" border>H色调</el-radio>
+                  <el-radio v-model="ValueOfRGBToHSI" label="S" size="large" border>S饱和度</el-radio>
+                  <el-radio v-model="ValueOfRGBToHSI" label="I" size="large" border>I强度</el-radio>
+                  <el-radio v-model="ValueOfRGBToHSI" label="HSI" size="large" border>HSI</el-radio>
+                </div>
+              </div>
+            </div>
+            <el-button @click="rgbToHSIHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+
+            <el-divider content-position="center" style="font-size: 20px">彩图分割</el-divider>
+            <div style="margin-bottom: 15px"> 
+              <div>
+                <el-radio v-model="ValueOfEdgeColor" label="Sobel" size="large" border>Sobel</el-radio>
+                <el-radio v-model="ValueOfEdgeColor" label="LoG" size="large" border>LoG</el-radio>
+                <el-radio v-model="ValueOfEdgeColor" label="Laplace" size="large" border>Laplace</el-radio>
+              </div>
+            </div>
+
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">滤波核大小</span>
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputEdgeColorKernel" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
+                
+            </div>
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值的大小</span>
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputEdgeColorThreshold" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
+            </div>
+            
+
+            <el-button @click="edgeColorHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+
+          </div>
+        </el-scrollbar>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -560,6 +624,11 @@ export default {
       //Otsu，基于全局阈值
       ValueOfOtsuOrGlobal: "Otsu",
 
+      //边缘检测,阈值
+      ValueOfEdge: "Sobel",
+      inputEdgeKernel: '',
+      inputEdgeThreshold: '',
+
       //平滑滤波（中值/均值），滤波核大小
       ValueOfMeanOrMedian: "mean",
       inputMeanOrMedianSize: '',
@@ -581,6 +650,15 @@ export default {
       ValueOfHighFilter: "idealHigh",
       inputHighThreshold: '',
       inputHighButter: '',
+
+      //rgbToHsi
+      ValueOfRGBToHSI: "H",
+
+      //彩图分割，阈值
+      ValueOfEdgeColor: "Sobel",
+      inputEdgeColorKernel: '',
+      inputEdgeColorThreshold: '',
+
 
     };
   },
@@ -1075,6 +1153,35 @@ export default {
         type: "success",
       });
     },
+    
+    async edgeHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
+
+      //针对不同操作调用不同API即可
+      let res = await API.edge({
+        ValueOfEdge: this.ValueOfEdge,
+        inputEdgeKernel: this.inputEdgeKernel,
+        inputEdgeThreshold: this.inputEdgeThreshold,
+        id: _id,
+      });
+
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过分割处理",
+        type: "success",
+      });
+    },
 
     async filterHandler() {
       let loading = ElLoading.service({
@@ -1243,10 +1350,62 @@ export default {
         type: "success",
       });
     },
+    
+    async rgbToHSIHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
 
+      //针对不同操作调用不同API即可
+      let res = await API.rgbToHSI({
+        ValueOfRGBToHSI: this.ValueOfRGBToHSI,
+        id: _id,
+      });
 
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过处理",
+        type: "success",
+      });
+    },
+    
+    async edgeColorHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
 
+      //针对不同操作调用不同API即可
+      let res = await API.edgeColor({
+        ValueOfEdgeColor: this.ValueOfEdgeColor,
+        inputEdgeColorKernel: this.inputEdgeColorKernel,
+        inputEdgeColorThreshold: this.inputEdgeColorThreshold,
+        id: _id,
+      });
 
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过处理",
+        type: "success",
+      });
+    },
 
 
 
