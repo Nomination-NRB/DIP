@@ -221,18 +221,39 @@
               </el-icon>
               应用
             </el-button>
-            <el-divider content-position="center" style="font-size: 20px">维纳滤波
+            <el-divider content-position="center" style="font-size: 20px">复原函数
             </el-divider>
             <el-row>
               <div style="margin-bottom: 15px">
                 <div>
-                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="PSF" size="large" border>PSF</el-radio>
-                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NSR" size="large" border>NSR</el-radio>
-                  <el-radio @change="radioChange" v-model="ValueOfWiener" label="NCORR, ICORR" size="large" border>
-                    NCORR, ICORR</el-radio>
+                  <el-tag style="margin-top: 6px; align-items: center; font-size: 15px">PSF</el-tag>
+                </div>
+                <div class="slider-demo-block">
+                  <span class="demonstration" style="margin-right: 4px; overflow: visible">距离</span>
+                  <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputPSFDistance"
+                    placeholder="输入值" style="margin-left: 10px; width: 200px" />
+                </div>
+                <div class="slider-demo-block">
+                  <span class="demonstration" style="margin-right: 4px; overflow: visible">角度</span>
+                  <el-input oninput="if(value>360)value=360;if(value<0)value=0" v-model="inputPSFAngle"
+                    placeholder="输入值" style="margin-left: 10px; width: 200px" />
+                </div>
+
+                <div>
+                  <el-tag style="margin-top: 6px; align-items: center; font-size: 15px">NSR</el-tag>
+                </div>
+                <div class="slider-demo-block">
+                  <span class="demonstration" style="margin-right: 4px; overflow: visible">半径</span>
+                  <el-input onkeyup="value=value.replace(/[^\d]/g,'')"
+                    oninput="if(value>200)value=200;if(value<0)value=0" v-model="inputNSRRadius" placeholder="输入值"
+                    style="margin-left: 10px; width: 200px" />
                 </div>
               </div>
             </el-row>
+            <div>
+                  <el-radio v-model="ValueOfwienerOrsmooth" label="wiener" size="large" border>维纳滤波</el-radio>
+                  <el-radio v-model="ValueOfwienerOrsmooth" label="smooth" size="large" border>约束复原</el-radio>
+            </div>
             <el-button @click="wienerHandler" type="primary"
               style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
@@ -240,15 +261,7 @@
               </el-icon>
               应用
             </el-button>
-            <el-divider content-position="center" style="font-size: 20px">平滑约束复原
-            </el-divider>
-            <el-button @click="smoothHandler" type="primary"
-              style="margin-top: 6px; margin-left: 4px; align-items: center">
-              <el-icon size="medium">
-                <Setting />
-              </el-icon>
-              应用
-            </el-button>
+            
             <el-divider content-position="center" style="font-size: 20px">自适应中值滤波
             </el-divider>
             <el-button @click="selfMedianHandler" type="primary"
@@ -291,9 +304,9 @@
             <el-divider content-position="center" style="font-size: 20px">边缘检测</el-divider>
             <div style="margin-bottom: 15px">
               <div>
-                <el-radio v-model="ValueOfSharpen" label="Sobel" size="large" border>Sobel</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="LoG" size="large" border>LoG</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="Laplace" size="large" border>Laplace</el-radio>
+                <el-radio v-model="ValueOfSharpenTwo" label="Sobel" size="large" border>Sobel</el-radio>
+                <el-radio v-model="ValueOfSharpenTwo" label="LoG" size="large" border>LoG</el-radio>
+                <el-radio v-model="ValueOfSharpenTwo" label="Laplace" size="large" border>Laplace</el-radio>
               </div>
             </div>
 
@@ -340,11 +353,33 @@
 
             <el-divider content-position="center" style="font-size: 20px">锐化
             </el-divider>
+            <div>
+                  <el-tag style="margin-bottom: 8px; align-items: center; font-size: 15px">一阶锐化</el-tag>
+            </div>
             <div style="margin-bottom: 15px">
               <div>
-                <el-radio v-model="ValueOfSharpen" label="Sobel" size="large" border>Sobel</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="LoG" size="large" border>LoG</el-radio>
-                <el-radio v-model="ValueOfSharpen" label="Laplace" size="large" border>Laplace</el-radio>
+                <el-radio v-model="ValueOfSharpenOne" label="Roberts" size="large" border>Roberts</el-radio>
+                <el-radio v-model="ValueOfSharpenOne" label="Prewitt" size="large" border>Prewitt</el-radio>
+              </div>
+            </div>
+
+            <el-button @click="sharpenHandlerOne" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+
+
+            <div>
+                  <el-tag style="margin-bottom: 8px; margin-top: 15px; align-items: center; font-size: 15px">二阶锐化</el-tag>
+            </div>
+            <div style="margin-bottom: 15px">
+              <div>
+                <el-radio v-model="ValueOfSharpenTwo" label="Sobel" size="large" border>Sobel</el-radio>
+                <el-radio v-model="ValueOfSharpenTwo" label="LoG" size="large" border>LoG</el-radio>
+                <el-radio v-model="ValueOfSharpenTwo" label="Laplace" size="large" border>Laplace</el-radio>
               </div>
             </div>
 
@@ -354,7 +389,7 @@
                 style="margin-left: 10px; width: 200px" />
             </div>
 
-            <el-button @click="sharpenHandler" type="primary"
+            <el-button @click="sharpenHandlerTwo" type="primary"
               style="margin-top: 6px; margin-left: 4px; align-items: center">
               <el-icon size="medium">
                 <Setting />
@@ -403,7 +438,8 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">巴特幂次</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputLowButter" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputLowButter" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="lowFilterHandler" type="primary"
               style="margin-top: 26px; margin-left: 4px; align-items: center">
@@ -431,7 +467,8 @@
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">巴特幂次</span>
-              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputHighButter" placeholder="输入值" style="margin-left: 10px; width: 200px" />
+              <el-input oninput="if(value>255)value=255;if(value<0)value=0" v-model="inputHighButter" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="highFilterHandler" type="primary"
               style="margin-top: 26px; margin-left: 4px; align-items: center">
@@ -508,11 +545,11 @@ export default {
       inputMotionAngle: '',
       inputMotionRadius: '',
 
-      //维纳滤波
-      ValueOfWiener: "PSF",
-
-      //平滑约束复原，无参数（待修改）
-      smoothValue: 0,
+      //维纳滤波，平滑约束复原
+      inputPSFDistance: '',
+      inputPSFAngle: '',
+      inputNSRRadius: '',
+      ValueOfwienerOrsmooth: 'wiener',
 
       //自适应中值滤波，无参数（待修改）
       selfMedianValue: 0,
@@ -528,7 +565,8 @@ export default {
       inputMeanOrMedianSize: '',
 
       //锐化滤波，滤波核大小
-      ValueOfSharpen: "Sobel",
+      ValueOfSharpenOne: "Roberts",
+      ValueOfSharpenTwo: "Sobel",
       inputSharpenSize: '',
 
       //傅里叶变换
@@ -784,37 +822,6 @@ export default {
       });
     },
 
-
-
-
-    async histogramToOneHandler() {
-      let loading = ElLoading.service({
-        lock: true,
-        text: "处理中...",
-        background: "rgba(255, 255, 255, 0.2)",
-      });
-      let _id = this.$store.getters.id;
-      //以上为必备操作
-
-      //针对不同操作调用不同API即可
-      let res = await API.histogramToOne({
-        histogramToOneValue: this.histogramToOneValue,
-        id: _id,
-      });
-
-      //以下为必备操作
-      this.$store.commit("image/SET_URL", res.data.file);
-      this.$forceUpdate();
-      this.$emit("refresh");
-      loading.close();
-      ElNotification({
-        title: "操作成功",
-        message: "直方图已归一化",
-        type: "success",
-      });
-    },
-
-
     async linearChangeHandler() {
       let loading = ElLoading.service({
         lock: true,
@@ -969,7 +976,10 @@ export default {
 
       //针对不同操作调用不同API即可
       let res = await API.wiener({
-        ValueOfwiener: this.ValueOfWiener,
+        inputPSFDistance: this.inputPSFDistance,
+        inputPSFAngle: this.inputPSFAngle,
+        inputNSRRadius: this.inputNSRRadius,
+        ValueOfwienerOrsmooth: this.ValueOfwienerOrsmooth,
         id: _id,
       });
 
@@ -981,33 +991,6 @@ export default {
       ElNotification({
         title: "操作成功",
         message: "图片已经过Wiener滤波处理",
-        type: "success",
-      });
-    },
-
-    async smoothHandler() {
-      let loading = ElLoading.service({
-        lock: true,
-        text: "处理中...",
-        background: "rgba(255, 255, 255, 0.2)",
-      });
-      let _id = this.$store.getters.id;
-      //以上为必备操作
-
-      //针对不同操作调用不同API即可
-      let res = await API.smooth({
-        smoothValue: this.smoothValue,
-        id: _id,
-      });
-
-      //以下为必备操作
-      this.$store.commit("image/SET_URL", res.data.file);
-      this.$forceUpdate();
-      this.$emit("refresh");
-      loading.close();
-      ElNotification({
-        title: "操作成功",
-        message: "图片已经过平滑约束复原处理",
         type: "success",
       });
     },
@@ -1121,7 +1104,7 @@ export default {
       });
     },
 
-    async sharpenHandler() {
+    async sharpenHandlerOne() {
       let loading = ElLoading.service({
         lock: true,
         text: "处理中...",
@@ -1131,8 +1114,35 @@ export default {
       //以上为必备操作
 
       //针对不同操作调用不同API即可
-      let res = await API.sharpen({
-        ValueOfSharpen: this.ValueOfSharpen,
+      let res = await API.sharpenOne({
+        ValueOfSharpenOne: this.ValueOfSharpenOne,
+        id: _id,
+      });
+
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过锐化处理",
+        type: "success",
+      });
+    },
+
+    async sharpenHandlerTwo() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
+
+      //针对不同操作调用不同API即可
+      let res = await API.sharpenTwo({
+        ValueOfSharpenTwo: this.ValueOfSharpenTwo,
         inputSharpenSize: this.inputSharpenSize,
         id: _id,
       });

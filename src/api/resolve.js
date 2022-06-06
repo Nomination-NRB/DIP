@@ -159,14 +159,6 @@ export function wiener(data) {
   });
 }
 
-// 平滑约束复原
-export function smooth(data) {
-  return request({
-    url: "/smooth/",
-    method: "post",
-    data,
-  });
-}
 
 // 自适应中值滤波
 export function selfMedian(data) {
@@ -205,9 +197,16 @@ export function filter(data) {
 }
 
 // 锐化滤波
-export function sharpen(data) {
+export function sharpenOne(data) {
   return request({
-    url: "/sharpen/",
+    url: "/sharpenOne/",
+    method: "post",
+    data,
+  });
+}
+export function sharpenTwo(data) {
+  return request({
+    url: "/sharpenTwo/",
     method: "post",
     data,
   });
