@@ -168,12 +168,12 @@
             <el-divider content-position="center" style="font-size: 20px">高斯噪声</el-divider>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">均值</span>
-              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputMean" placeholder="输入值"
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputMean" placeholder="输入值"
                 style="margin-left: 10px; width: 200px" />
             </div>
             <div class="slider-demo-block">
               <span class="demonstration" style="margin-right: 4px; overflow: visible">方差</span>
-              <el-input oninput="if(value>1)value=1;if(value<0)value=0" v-model="inputVariance" placeholder="输入值"
+              <el-input oninput="if(value>100)value=100;if(value<0)value=0" v-model="inputVariance" placeholder="输入值"
                 style="margin-left: 10px; width: 200px" />
             </div>
             <el-button @click="addGaussianHandler" type="primary"
