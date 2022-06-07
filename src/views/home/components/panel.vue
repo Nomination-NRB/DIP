@@ -301,6 +301,26 @@
               应用
             </el-button>
 
+            <div style="margin-bottom: 15px">
+              <div>
+                <el-radio style="margin-top: 15px;" v-model="ValueOfAreaGrow" label="AreaGrow" size="large" border>区域生长</el-radio>
+              </div>
+            </div>
+            
+            <div class="slider-demo-block">
+              <span class="demonstration" style="margin-right: 4px; overflow: visible">阈值</span>
+              <el-input oninput="if(value>10)value=10;if(value<0)value=0" v-model="inputAreaGrow" placeholder="输入值"
+                style="margin-left: 10px; width: 200px" />
+            </div>
+
+            <el-button @click="AreaGrowHandler" type="primary"
+              style="margin-top: 6px; margin-left: 4px; align-items: center">
+              <el-icon size="medium">
+                <Setting />
+              </el-icon>
+              应用
+            </el-button>
+
             <el-divider content-position="center" style="font-size: 20px">边缘检测</el-divider>
             <div style="margin-bottom: 15px"> 
               <div>
@@ -330,6 +350,9 @@
               </el-icon>
               应用
             </el-button>
+
+            
+
           </div>
         </el-scrollbar>
       </el-tab-pane>
@@ -623,6 +646,10 @@ export default {
 
       //Otsu，基于全局阈值
       ValueOfOtsuOrGlobal: "Otsu",
+
+      //区域生长
+      ValueOfAreaGrow: "AreaGrow",
+      inputAreaGrow: '',
 
       //边缘检测,阈值
       ValueOfEdge: "Sobel",
@@ -1154,6 +1181,35 @@ export default {
       });
     },
     
+    async AreaGrowHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
+
+      //针对不同操作调用不同API即可
+      let res = await API.AreaGrow({
+        ValueOfAreaGrow: this.ValueOfAreaGrow,
+        inputAreaGrow: this.inputAreaGrow,
+        id: _id,
+      });
+
+      //以下为必备操作
+      this.$store.commit("image/SET_URL", res.data.file);
+      this.$forceUpdate();
+      this.$emit("refresh");
+      loading.close();
+      ElNotification({
+        title: "操作成功",
+        message: "图片已经过分割处理",
+        type: "success",
+      });
+    },
+
+
     async edgeHandler() {
       let loading = ElLoading.service({
         lock: true,

@@ -187,6 +187,13 @@ export function partition(data) {
   });
 }
 
+export function AreaGrow(data) {
+  return request({
+    url: "/AreaGrow/",
+    method: "post",
+    data,
+  });
+}
 //边缘检测
 export function edge(data) {
   return request({
