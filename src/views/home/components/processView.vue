@@ -163,7 +163,8 @@ export default {
         id: this.imageID,
       });
       console.log("完成后获取的直方图：", histData);
-      this.modImageUrl = this.$store.getters.url + "?date=" + String(Date.now());
+      this.modImageUrl =
+        this.$store.getters.url + "?date=" + String(Date.now());
       this.chartOpt = this.$eChartFn.testBar(histData);
       this.$forceUpdate();
     },
@@ -196,6 +197,7 @@ export default {
       console.log("待上传的图像：", param);
       const formData = new FormData();
       formData.append("file", param.file);
+      formData.append("ori_file", param.file);
       API.uploadImage(formData).then((res) => {
         this.handleImgSuccess(res, param.file);
       });
