@@ -1,8 +1,15 @@
 <template>
   <div class="container">
     <div class="mainView">
-      <!-- <div class="viewTitle">数字图像处理面板</div></div> -->
+      
       <div class="stepView">
+        <el-button @click="newHandler" type="primary"
+              style="align-items: center; margin-left: 92%">
+              <el-icon size="mini">
+                <Setting />
+              </el-icon>
+              复原
+            </el-button>
         <div
           class="stepContent"
           :style="{
@@ -158,6 +165,29 @@ export default {
         });
       }
     },
+    
+    async newHandler() {
+      let loading = ElLoading.service({
+        lock: true,
+        text: "处理中...",
+        background: "rgba(255, 255, 255, 0.2)",
+      });
+      let _id = this.$store.getters.id;
+      //以上为必备操作
+
+      //针对不同操作调用不同API即可
+      let res = await API.new_({
+        id: _id,
+      });
+      this.refreshHandle()
+      loading.close()
+      ElNotification({
+        title: "操作成功",
+        message: "图片已复原",
+        type: "success",
+      });
+    },
+
     async refreshHandle() {
       let { data: histData } = await API.getHistArray({
         id: this.imageID,

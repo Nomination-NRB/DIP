@@ -356,7 +356,6 @@
           </div>
         </el-scrollbar>
       </el-tab-pane>
-
       <el-tab-pane label="空间域操作" name="space" class="el-tabs__content">
         <el-scrollbar noresize height="560px">
           <div style="width: 98%">

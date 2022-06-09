@@ -23,6 +23,14 @@ export function getHistArray(data) {
   });
 }
 
+export function new_(data) {
+  return request({
+    url: "/new_/",
+    method: "post",
+    data,
+  });
+}
+
 // 缩小放大
 export function resize(data) {
   return request({
