@@ -1,15 +1,15 @@
 <template>
   <div class="container">
     <div class="mainView">
-      
-      <div class="stepView">
-        <el-button @click="newHandler" type="primary"
+      <el-button @click="newHandler" type="primary"
               style="align-items: center; margin-left: 92%">
               <el-icon size="mini">
                 <Setting />
               </el-icon>
               复原
             </el-button>
+      <div class="stepView">
+        
         <div
           class="stepContent"
           :style="{
@@ -76,7 +76,7 @@
               </div>
             </div>
             <div class="rightContent">
-              <panel v-if="imageID" @refresh="refreshHandle" />
+              <panel v-if="!imageID" @refresh="refreshHandle" />
               <el-skeleton v-else :rows="16" animated />
             </div>
           </div>
